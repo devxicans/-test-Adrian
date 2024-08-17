@@ -24,22 +24,22 @@ export const Form = () => {
     setContactInfo({...contactInfo, [e.target.name] : [e.target.value]})
   }
 
-  const submitContact = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    const {name, email, message} = contactInfo;
-    const newContact = {
-      name,
-      email,
-      message
-    }
+  // const submitContact = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault()
+  //   const {name, email, message} = contactInfo;
+  //   const newContact = {
+  //     name,
+  //     email,
+  //     message
+  //   }
 
-    console.log(newContact);
-  }
+  //   console.log(newContact);
+  // }
 
 
   return (
     <div className={stylesForm.container}>
-      <form onSubmit={submitContact} className={stylesForm.form}>
+      <form className={stylesForm.form}>
         <h3 className={stylesForm.title}>
           NewsLetter
         </h3>
