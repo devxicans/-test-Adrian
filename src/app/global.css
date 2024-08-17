@@ -16,3 +16,163 @@
 @import url(../../node_modules/@uireact/foundation/dist/index.css);
 @import url(../../node_modules/@uireact/icons/dist/index.css);
 @import url(../../node_modules/@uireact/text/dist/index.css);
+
+/* Default Styles for any projects */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  /* font-family: var(--font-family); */
+}
+
+* {
+  margin: 0;
+  line-height: calc(1em + 0.5rem);
+}
+
+.light__mode {
+  /* colors */
+  --bg-color: #cbd5e1;
+  --header-color: #94a3b8;
+  --clr-default: #0f172a;
+  --clr-primary: #1e293b;
+
+  /* Box Shadows */
+  --header-shadow: 0 6px 9px -4px rgba(0, 0, 0, 0.5);
+  --sidebar-shadow: 0 3px 17px rgba(0, 0, 0, 0.1);
+}
+
+:root {
+  /* colors */
+  --bg-color: #0f172a;
+  --header-color: #334155;
+  --clr-default: #f8fafc;
+  --clr-primary: #cbd5e1;
+
+  /* Box Shadows */
+  --header-shadow: 0 6px 9px -4px rgba(0, 0, 0);
+  --sidebar-shadow: 0 3px 17px rgba(0, 0, 0, 0.4);
+
+  /* sizes */
+  --text-xss: 0.5rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
+  --text-7xl: 4.5rem;
+  --text-8xl: 6rem;
+  --text-9xl: 8rem;
+  --text-10xl: 10rem;
+
+  /* Font family */
+  /* --font-family: 'Poppins', sans-serif; */
+
+  /* Container */
+  --container-width: 1900px;
+  --container-padding: 0.5rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--clr-default);
+  overflow-x: hidden;
+}
+
+/* Defaults styles */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+i {
+  font-size: 1em;
+  cursor: pointer;
+  color: var(--clr-default);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  display: inline-block;
+  padding: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  user-select: none;
+}
+
+/* media querys > desktop */
+
+.container {
+  max-width: var(--container-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* 2xl */
+@media (max-width: 1536px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* xl */
+@media (max-width: 1280px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+/* lg */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+/* md */
+@media (max-width: 768px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+/* sm */
+@media (max-width: 640px) {
+  .container {
+    max-width: 475px;
+  }
+}
+
+/* xs */
+@media (max-width: 475px) {
+  .container {
+    max-width: 100%;
+  }
+}

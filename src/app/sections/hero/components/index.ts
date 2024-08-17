@@ -1,2 +1,1 @@
-export * from './gradient-bg';
-export * from './waves';
+export * from './gradient';

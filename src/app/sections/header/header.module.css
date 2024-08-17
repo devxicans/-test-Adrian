@@ -1,0 +1,21 @@
+.header {
+  padding: 20px;
+  background-color: var(--header-color);
+}
+
+.logo {
+  font-size: var(--text-2xl);
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}

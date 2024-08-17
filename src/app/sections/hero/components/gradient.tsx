@@ -1,6 +1,5 @@
-import React from 'react';
 
-import styles from './gradient.module.scss';
+import styles from './gradient.module.css';
 
 export const GradientBg = () => {
     return (
