@@ -1,7 +1,17 @@
+import {Form} from '../sections'
+
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Adrian - Contact",
+};
 
 const Contact = () => {
+
   return (
-    <div>Nothing Yet : (</div>
+    <>
+      <Form/>
+    </>
   )
 }
 

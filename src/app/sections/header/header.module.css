@@ -19,3 +19,33 @@
   justify-content: center;
   gap: 10px;
 }
+
+.padding {
+  background-color: var(--bg-color);
+  border-radius: 10px;
+}
+
+/* sm */
+@media (max-width: 640px) {
+  .logo {
+    font-size: var(--text-base);
+  }
+
+  .padding {
+    padding: 10px;
+    background-color: var(--bg-color);
+    border-radius: 10px;
+  }
+
+  .wrapper {
+    justify-content: space-between;
+  }
+
+  .header {
+    padding: 20px 10px;
+  }
+}
+
+/* xs */
+@media (max-width: 475px) {
+}
