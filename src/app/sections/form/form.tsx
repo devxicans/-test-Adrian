@@ -52,7 +52,7 @@ export const Form = () => {
           <label className={isFocusEmail ? stylesForm.active  :  stylesForm.label} htmlFor='email'>Email</label>
         </div>
         <div onFocus={() => setIsFocusMessage(true)} className={stylesForm.wrapper}>
-          <textarea  className={stylesForm.input} name='message' id='message' value={contactInfo.message}  onChange={onChange} autoComplete='off' required></textarea>
+          <textarea  className={stylesForm.input} name='message' id='message' value={contactInfo.message}  autoComplete='off' required></textarea>
           <label className={isFocusMessage ? stylesForm.active  :  stylesForm.label} htmlFor='message'>Message</label>
         </div>
         <div className={stylesForm.flex}>
