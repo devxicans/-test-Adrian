@@ -17,6 +17,7 @@
     "@uireact/icons": "^3.0.5",
     "@uireact/navbar": "^3.0.8",
     "@uireact/text": "^3.0.4",
+    "@uireact/validator": "^1.5.4",
     "@uireact/view": "^3.0.4",
     "framer-motion": "^11.2.2",
     "next": "14.2.3",

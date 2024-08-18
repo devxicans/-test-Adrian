@@ -67,11 +67,17 @@
   width: 100%;
   padding: 10px;
   border: none;
-  background-color: var(--header-color);
+  background-color: var(--bg-color);
   color: var(--clr-default);
   font-weight: bold;
   font-size: var(--text-lg);
   text-align: center;
+  box-shadow: var(--sidebar-shadow);
+}
+
+.btn:hover {
+  box-shadow: none;
+  transition: 0.3s ease-in-out;
 }
 
 .flex {
@@ -79,7 +85,11 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background-color: var(--bg-color);
-  padding: 10px;
   border-radius: 10px;
+}
+
+.span {
+  margin-top: 10px;
+  color: white;
+  display: none;
 }
