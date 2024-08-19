@@ -17,11 +17,11 @@ export const Form = () => {
 
 
 
-  const [isFocusName, setIsFocusName] = useState(false);
-  const [isFocusEmail, setIsFocusEmail] = useState(false);
-  const [isFocusMessage, setIsFocusMessage] = useState(false);
-  const [onSubmit, setOnSubmit] = useState(false);
-  const [isError, setIsError] = useState(false)
+  const [isFocusName, setIsFocusName] = useState<boolean>(false);
+  const [isFocusEmail, setIsFocusEmail] = useState<boolean>(false);
+  const [isFocusMessage, setIsFocusMessage] = useState<boolean>(false);
+  const [onSubmit, setOnSubmit] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false)
 
   //  Validate from client to then sent to API (using UiReact)
   const validator = new UiValidator();
@@ -67,6 +67,21 @@ export const Form = () => {
       }
   }
 
+  const sendEmail = async () => {
+    const response = await fetch('/api/emails', {
+      method: "POST",
+    })
+    
+    if (!response.ok) {
+      return toast.error('Something went wrong')
+    }
+
+    const data = await response.json();
+    toast.success('Email sent successfully to your email')
+    console.log(data);
+  }
+
+
 
   const sendContact = async (info: {}) => {
     const response = await fetch('/api/contacts', {
@@ -83,6 +98,7 @@ export const Form = () => {
     toast.success('The Information was successfully send')
     const data = await response.json();
     console.log(data);
+    sendEmail()
   }
 
 
