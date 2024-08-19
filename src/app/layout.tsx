@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Sen } from "next/font/google";
 import { ViewWrapper } from '@/lib';
 import './global.css';
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/ReactToastify.css'
 
 const sen = Sen({ style: 'normal', subsets: ['latin'], variable: '--font-family' });
 
@@ -16,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={sen.variable}>
+        <ToastContainer/>
           <ViewWrapper>
             {children}
           </ViewWrapper>

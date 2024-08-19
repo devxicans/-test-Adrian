@@ -4,7 +4,8 @@ import stylesForm from './form.module.css'
 import { useState } from 'react'
 import React from 'react'
 import { UiValidator, UiValidatorErrors } from '@uireact/validator';
-
+import { toast } from 'react-toastify'
+import { POST } from '@/app/api/contacts/route'
 
 
 export const Form = () => {
@@ -14,10 +15,13 @@ export const Form = () => {
     message: ""
   })
 
+
+
   const [isFocusName, setIsFocusName] = useState(false);
   const [isFocusEmail, setIsFocusEmail] = useState(false);
   const [isFocusMessage, setIsFocusMessage] = useState(false);
   const [onSubmit, setOnSubmit] = useState(false);
+  const [isError, setIsError] = useState(false)
 
   //  Validate from client to then sent to API (using UiReact)
   const validator = new UiValidator();
@@ -31,30 +35,55 @@ export const Form = () => {
 
   const checkValidation = (e: React.FormEvent) => {
     e.preventDefault()
-    const { name, email, message } = contactInfo;
+      const { name, email, message } = contactInfo;
 
-    const newContact = {
-      name,
-      email,
-      message
-    }
+      const newContact = {
+        name,
+        email,
+        message
+      }
 
-    const result = validator.validate(Schema, newContact);
+      const result = validator.validate(Schema, newContact);
 
-    if (result.passed) {
+      if (result.passed) {
+        setTimeout(() => {
+          setOnSubmit(false)
+          setIsError(false)
+          contactInfo.name = '';
+          contactInfo.email = '';
+          contactInfo.message = '';
+          setIsFocusName(false);
+          setIsFocusEmail(false);
+          setIsFocusMessage(false);
+        }, 2000)
         setOnSubmit(true)
-        contactInfo.name = '';
-        contactInfo.email = '';
-        contactInfo.message = '';
-        setIsFocusName(false);
-        setIsFocusEmail(false);
-        setIsFocusMessage(false);
-        console.log(newContact);
-    } else {
-     return console.log(result.errors);
-    }
+        return sendContact(newContact);
+      }
+
+      if (result.errors) {
+        // const { name, email, message } = result.errors;
+        toast.error(`Please be sure to fill out every field of the form`)
+        setIsError(true)
+      }
   }
 
+
+  const sendContact = async (info: {}) => {
+    const response = await fetch('/api/contacts', {
+        method: "POST",
+        body: JSON.stringify(info)
+    })
+
+    if (!response.ok) {
+      toast.error('Something went wrong')
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 2000)) // Wait 2 seconds
+
+    toast.success('The Information was successfully send')
+    const data = await response.json();
+    console.log(data);
+  }
 
 
 
@@ -75,19 +104,19 @@ export const Form = () => {
           NewsLetter
         </h3>
         <div onFocus={() => setIsFocusName(true)} className={stylesForm.wrapper}>
-          <input type="text" name='name' id='name' value={contactInfo.name} className={stylesForm.input} onChange={onChangeInputs}  autoComplete='off' required/>
+          <input type="text" name='name' id='name' value={contactInfo.name} className={isError ? stylesForm.input__error : stylesForm.input}  onChange={onChangeInputs}  autoComplete='off' required />
           <label className={isFocusName ? stylesForm.active : stylesForm.label} htmlFor='name'>Full Name</label>
-          <span className={stylesForm.span}>This is an error message</span>
+          <span className={isError ? stylesForm.span : stylesForm.span__close}>Full Name is required</span>
         </div>
         <div onFocus={() => setIsFocusEmail(true)} className={stylesForm.wrapper}>
-          <input type="email" name='email' value={contactInfo.email} id='email' className={stylesForm.input} onChange={onChangeInputs}  autoComplete='off' required />
+          <input type="email" name='email' value={contactInfo.email} id='email' className={isError ? stylesForm.input__error : stylesForm.input} onChange={onChangeInputs}  autoComplete='off' required  />
           <label className={isFocusEmail ? stylesForm.active  :  stylesForm.label} htmlFor='email'>Email</label>
-          <span className={stylesForm.span}>This is an error message</span>
+          <span className={isError ? stylesForm.span : stylesForm.span__close}>Email is required</span>
         </div>
         <div onFocus={() => setIsFocusMessage(true)} className={stylesForm.wrapper}>
-          <textarea  className={stylesForm.input} name='message' id='message' value={contactInfo.message}  autoComplete='off' onChange={onChangeTextAreas} ></textarea>
+          <textarea  className={isError ? stylesForm.input__error : stylesForm.input} name='message' id='message' value={contactInfo.message}  autoComplete='off' onChange={onChangeTextAreas} ></textarea>
           <label className={isFocusMessage ? stylesForm.active  :  stylesForm.label} htmlFor='message'>Message</label>
-          <span className={stylesForm.span}>This is an error message</span>
+          <span className={isError ? stylesForm.span : stylesForm.span__close}>Message is required</span>
         </div>
         <div className={stylesForm.flex}>
           <button type="submit" className={stylesForm.btn}>{ onSubmit ? `Sending...`: 'Send'}</button>

@@ -33,6 +33,18 @@
   color: var(--clr-default);
   font-weight: 500;
   background-color: inherit;
+  min-width: 100%;
+}
+
+.input__error {
+  padding: 12px 18px;
+  border-radius: 5px;
+  background-color: inherit;
+  border: none;
+  color: var(--clr-default);
+  font-weight: 500;
+  background-color: inherit;
+  outline: 1px solid red;
 }
 
 .title {
@@ -90,6 +102,10 @@
 
 .span {
   margin-top: 10px;
-  color: white;
+  color: red;
+  font-size: var(--text-sm);
+}
+
+.span__close {
   display: none;
 }
