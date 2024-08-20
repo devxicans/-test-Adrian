@@ -67,18 +67,29 @@ export const Form = () => {
       }
   }
 
+  
+  
   const sendEmail = async () => {
+    const { email } = contactInfo;
+
+
+
     const response = await fetch('/api/emails', {
       method: "POST",
+      body: JSON.stringify({ email: email }),
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    
+
+
     if (!response.ok) {
+      console.log(response);
       return toast.error('Something went wrong')
     }
 
-    const data = await response.json();
+    await response.json();
     toast.success('Email sent successfully to your email')
-    console.log(data);
   }
 
 
@@ -95,9 +106,10 @@ export const Form = () => {
 
     await new Promise((resolve) => setTimeout(resolve, 2000)) // Wait 2 seconds
 
-    toast.success('The Information was successfully send')
+    
     const data = await response.json();
-    console.log(data);
+
+
     sendEmail()
   }
 
@@ -130,7 +142,7 @@ export const Form = () => {
           <span className={isError ? stylesForm.span : stylesForm.span__close}>Email is required</span>
         </div>
         <div onFocus={() => setIsFocusMessage(true)} className={stylesForm.wrapper}>
-          <textarea  className={isError ? stylesForm.input__error : stylesForm.input} name='message' id='message' value={contactInfo.message}  autoComplete='off' onChange={onChangeTextAreas} ></textarea>
+          <textarea  className={isError ? stylesForm.input__error : stylesForm.input} name='message' id='message' value={contactInfo.message}  autoComplete='off' onChange={onChangeTextAreas} required></textarea>
           <label className={isFocusMessage ? stylesForm.active  :  stylesForm.label} htmlFor='message'>Message</label>
           <span className={isError ? stylesForm.span : stylesForm.span__close}>Message is required</span>
         </div>

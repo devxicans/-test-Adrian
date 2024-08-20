@@ -1,7 +1,14 @@
-import { mailOptions, transport } from "@/app/utils/mail.utils";
+import { transport } from "@/app/utils/mail.utils";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
+  const { email } = await req.json()
+
+  const mailOptions = {
+    from: "adrife2000@gamil.com",
+    to: email || "adrife2000@gmail.com"
+  }
+
   try {
     await transport.sendMail({
       ...mailOptions,

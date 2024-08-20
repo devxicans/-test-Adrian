@@ -14,7 +14,3 @@ export const transport = nodemailer.createTransport({
 ,  }
 } as SMTPTransport.Options)
 
-export const mailOptions =  {
-  from: email,
-  to: email,
-}
