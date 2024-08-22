@@ -5,7 +5,6 @@ import { useState } from 'react'
 import React from 'react'
 import { UiValidator, UiValidatorErrors } from '@uireact/validator';
 import { toast } from 'react-toastify'
-import { POST } from '@/app/api/contacts/route'
 
 
 export const Form = () => {
@@ -43,7 +42,8 @@ export const Form = () => {
         message
       }
 
-      const result = validator.validate(Schema, newContact);
+    const result = validator.validate(Schema, newContact);
+    
 
       if (result.passed) {
         setTimeout(() => {
@@ -67,19 +67,9 @@ export const Form = () => {
       }
   }
 
-  
-  
   const sendEmail = async () => {
-    const { email } = contactInfo;
-
-
-
-    const response = await fetch('/api/emails', {
+    const response = await fetch('/api/email', {
       method: "POST",
-      body: JSON.stringify({ email: email }),
-      headers: {
-        "Content-Type": "application/json",
-      },
     })
 
 
@@ -109,7 +99,7 @@ export const Form = () => {
     
     const data = await response.json();
 
-
+    console.log(data);
     sendEmail()
   }
 

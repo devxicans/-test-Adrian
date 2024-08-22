@@ -1,18 +1,18 @@
-import { transport } from "@/app/utils/mail.utils";
 import { NextResponse } from "next/server";
+import {  transport } from "../utils/mail.utils";
 
 export async function POST(req: Request) {
-  const { email } = await req.json()
+  // const { email } = await req.json();
 
-  const mailOptions = {
-    from: "adrife2000@gamil.com",
-    to: email || "adrife2000@gmail.com"
+  const mailOptions =  {
+    from: "adrife2000@hotmail.com",
+    to: "adrife2000@hotmail.com",
   }
 
   try {
     await transport.sendMail({
       ...mailOptions,
-      subject: "We recieved your mail"
+      subject: "We recieve your email",
     })
     return NextResponse.json({message: "Email Sent Successfully"}, {status: 201});
   } catch (error) {
