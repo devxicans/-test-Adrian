@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
-import {  transport } from "../utils/mail.utils";
+import { transport } from "@/app/utils/mail.utils";
 
 export async function POST(req: Request) {
-  // const { email } = await req.json();
+  const { email } = await req.json();
 
   const mailOptions =  {
-    from: "adrife2000@hotmail.com",
-    to: "adrife2000@hotmail.com",
+    from: "adrife2000@gmail.com",
+    to: email,
   }
 
   try {

@@ -4,6 +4,7 @@ import { ViewWrapper } from '@/lib';
 import './global.css';
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/ReactToastify.css'
+import { Header } from "./sections";
 
 const sen = Sen({ style: 'normal', subsets: ['latin'], variable: '--font-family' });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={sen.variable}>
-        <ToastContainer/>
+        <ToastContainer />
           <ViewWrapper>
             {children}
           </ViewWrapper>

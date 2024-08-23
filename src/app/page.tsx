@@ -5,7 +5,7 @@ import { Header } from './sections';
 export default function Home() {
   return (
     <>
-    <Header />
+      <Header />
     <main>
       <Hero />
     </main>

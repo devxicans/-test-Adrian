@@ -6,6 +6,14 @@ import React from 'react'
 import { UiValidator, UiValidatorErrors } from '@uireact/validator';
 import { toast } from 'react-toastify'
 
+const validator = new UiValidator();
+
+const Schema = {
+  name: validator.ruler().isRequired('First Name is required'),
+  email: validator.ruler().isRequired('Email is required').type('email', 'Email is not valid'),
+  message: validator.ruler().isRequired('Message is required'),
+}
+
 
 export const Form = () => {
   const [contactInfo, setContactInfo] = useState({
@@ -15,74 +23,63 @@ export const Form = () => {
   })
 
 
-
   const [isFocusName, setIsFocusName] = useState<boolean>(false);
   const [isFocusEmail, setIsFocusEmail] = useState<boolean>(false);
   const [isFocusMessage, setIsFocusMessage] = useState<boolean>(false);
-  const [onSubmit, setOnSubmit] = useState<boolean>(false);
-  const [isError, setIsError] = useState<boolean>(false)
-
-  //  Validate from client to then sent to API (using UiReact)
-  const validator = new UiValidator();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState<UiValidatorErrors>();
 
 
-  const Schema = {
-    name: validator.ruler().isRequired('first Name is required'),
-    email: validator.ruler().isRequired('email is required'),
-    message: validator.ruler().isRequired('message is required'),
-  }
-
-  const checkValidation = (e: React.FormEvent) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-      const { name, email, message } = contactInfo;
 
-      const newContact = {
-        name,
-        email,
-        message
-      }
+    setLoading(true);
+    setErrors({});
 
-    const result = validator.validate(Schema, newContact);
-    
+    const { name, email, message } = contactInfo;
 
-      if (result.passed) {
-        setTimeout(() => {
-          setOnSubmit(false)
-          setIsError(false)
-          contactInfo.name = '';
-          contactInfo.email = '';
-          contactInfo.message = '';
-          setIsFocusName(false);
-          setIsFocusEmail(false);
-          setIsFocusMessage(false);
-        }, 2000)
-        setOnSubmit(true)
-        return sendContact(newContact);
-      }
+    const newContact = {
+      name,
+      email,
+      message
+    }
 
-      if (result.errors) {
-        // const { name, email, message } = result.errors;
-        toast.error(`Please be sure to fill out every field of the form`)
-        setIsError(true)
-      }
+
+    const result = validator.validate(Schema, newContact, true);
+
+    if (!result.passed) {
+      setErrors(result.errors);
+      setLoading(false)
+      return;
+    }
+
+    if (result.passed) {
+      sendContact(newContact)
+    }
   }
 
   const sendEmail = async () => {
+    const { email } = contactInfo;
+
     const response = await fetch('/api/email', {
       method: "POST",
+      body: JSON.stringify({email})
     })
 
 
     if (!response.ok) {
       console.log(response);
+      setLoading(false)
       return toast.error('Something went wrong')
     }
 
-    await response.json();
-    toast.success('Email sent successfully to your email')
+    toast.success('Email sent successfully')
+    setLoading(false)
+    setIsFocusName(false)
+    setIsFocusEmail(false)
+    setIsFocusMessage(false)
+    setContactInfo({ ...contactInfo, name: '', email: '', message: ''})
   }
-
-
 
   const sendContact = async (info: {}) => {
     const response = await fetch('/api/contacts', {
@@ -94,50 +91,49 @@ export const Form = () => {
       toast.error('Something went wrong')
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 2000)) // Wait 2 seconds
-
-    
-    const data = await response.json();
-
-    console.log(data);
     sendEmail()
   }
 
-
-
   const onChangeTextAreas = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContactInfo({...contactInfo, [e.currentTarget.name] : [e.currentTarget.value]})
+    setContactInfo({...contactInfo, [e.currentTarget.name] : e.currentTarget.value})
   }
 
   const onChangeInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setContactInfo({...contactInfo, [e.currentTarget.name] : [e.currentTarget.value]})
+    setContactInfo({
+      ...contactInfo,
+      [e.currentTarget.name]: e.currentTarget.value,
+    })
   }
-
-
 
   return (
     <div className={stylesForm.container}>
-      <form onSubmit={checkValidation} className={stylesForm.form}>
+      <form onSubmit={onSubmit} className={stylesForm.form}>
         <h3 className={stylesForm.title}>
           NewsLetter
         </h3>
         <div onFocus={() => setIsFocusName(true)} className={stylesForm.wrapper}>
-          <input type="text" name='name' id='name' value={contactInfo.name} className={isError ? stylesForm.input__error : stylesForm.input}  onChange={onChangeInputs}  autoComplete='off' required />
+          <input type="text" name='name' id='name' value={contactInfo.name} className={errors ? errors.name ? stylesForm.input__error : stylesForm.input : stylesForm.input}  onChange={onChangeInputs}  autoComplete='off'  required  />
           <label className={isFocusName ? stylesForm.active : stylesForm.label} htmlFor='name'>Full Name</label>
-          <span className={isError ? stylesForm.span : stylesForm.span__close}>Full Name is required</span>
+          {
+            errors?.name?.[0].message && <span className={stylesForm.span}>{errors?.name?.[0].message} </span>
+          }
         </div>
         <div onFocus={() => setIsFocusEmail(true)} className={stylesForm.wrapper}>
-          <input type="email" name='email' value={contactInfo.email} id='email' className={isError ? stylesForm.input__error : stylesForm.input} onChange={onChangeInputs}  autoComplete='off' required  />
+          <input  type='email' name='email' value={contactInfo.email} id='email' className={errors ? errors.email ? stylesForm.input__error : stylesForm.input : stylesForm.input} onChange={onChangeInputs}  autoComplete='off'    required />
           <label className={isFocusEmail ? stylesForm.active  :  stylesForm.label} htmlFor='email'>Email</label>
-          <span className={isError ? stylesForm.span : stylesForm.span__close}>Email is required</span>
+          {
+            errors?.email?.map((msgError, inx) => (<span key={`Email_error_message_${inx}`} className={stylesForm.span}>{msgError.message} </span>))
+          }
         </div>
         <div onFocus={() => setIsFocusMessage(true)} className={stylesForm.wrapper}>
-          <textarea  className={isError ? stylesForm.input__error : stylesForm.input} name='message' id='message' value={contactInfo.message}  autoComplete='off' onChange={onChangeTextAreas} required></textarea>
+          <textarea  className={errors ? errors.message ? stylesForm.input__error : stylesForm.input : stylesForm.input} name='message' id='message' value={contactInfo.message}  autoComplete='off' onChange={onChangeTextAreas} required  ></textarea>
           <label className={isFocusMessage ? stylesForm.active  :  stylesForm.label} htmlFor='message'>Message</label>
-          <span className={isError ? stylesForm.span : stylesForm.span__close}>Message is required</span>
+          {
+            errors?.message?.[0].message && <span className={stylesForm.span}>{errors?.message?.[0].message} </span>
+          }
         </div>
         <div className={stylesForm.flex}>
-          <button type="submit" className={stylesForm.btn}>{ onSubmit ? `Sending...`: 'Send'}</button>
+          <button type="submit" className={stylesForm.btn}>{ loading ? `Sending...`: 'Send'}</button>
           <Link href='/' className={stylesForm.btn}>Go Home</Link>
         </div>
       </form>

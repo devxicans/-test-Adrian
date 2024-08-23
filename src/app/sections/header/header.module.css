@@ -1,6 +1,7 @@
 .header {
   padding: 20px;
   background-color: var(--header-color);
+  box-shadow: var(--sidebar-shadow);
 }
 
 .logo {
