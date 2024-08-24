@@ -1,9 +1,9 @@
 import stylesLoading from './loading.module.css'
 
-const LoadingPage = () => {
+const LoadingPage = ({isActive = false}) => {
   return (
-    <div className={stylesLoading.loader}>
-      <div className={stylesLoading.spinner}></div>
+    <div className={ isActive ? stylesLoading.loaderActive : stylesLoading.loader}>
+      <div className={isActive ? stylesLoading.spinnerActive : stylesLoading.spinner}></div>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { useState } from 'react'
 import React from 'react'
 import { UiValidator, UiValidatorErrors } from '@uireact/validator';
 import { toast } from 'react-toastify'
+import LoadingPage from '@/app/loading'
 
 const validator = new UiValidator();
 
@@ -14,9 +15,15 @@ const Schema = {
   message: validator.ruler().isRequired('Message is required'),
 }
 
+type ContactInfo = {
+  name: string;
+  email: string;
+  message: string;
+}
+
 
 export const Form = () => {
-  const [contactInfo, setContactInfo] = useState({
+  const [contactInfo, setContactInfo] = useState<ContactInfo>({
     name: "",
     email: "",
     message: ""
@@ -30,7 +37,8 @@ export const Form = () => {
   const [errors, setErrors] = useState<UiValidatorErrors>();
 
 
-  const onSubmit = (e: React.FormEvent) => {
+
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     setLoading(true);
@@ -53,9 +61,7 @@ export const Form = () => {
       return;
     }
 
-    if (result.passed) {
-      sendContact(newContact)
-    }
+    await sendContact(newContact)
   }
 
   const sendEmail = async () => {
@@ -66,11 +72,9 @@ export const Form = () => {
       body: JSON.stringify({email})
     })
 
-
     if (!response.ok) {
-      console.log(response);
       setLoading(false)
-      return toast.error('Something went wrong')
+      return toast.error('Something went wrong when trying to sent email')
     }
 
     toast.success('Email sent successfully')
@@ -78,20 +82,20 @@ export const Form = () => {
     setIsFocusName(false)
     setIsFocusEmail(false)
     setIsFocusMessage(false)
-    setContactInfo({ ...contactInfo, name: '', email: '', message: ''})
+    setContactInfo({ name: '', email: '', message: ''})
   }
 
-  const sendContact = async (info: {}) => {
+  const sendContact = async (info: ContactInfo) => {
     const response = await fetch('/api/contacts', {
         method: "POST",
         body: JSON.stringify(info)
     })
 
     if (!response.ok) {
-      toast.error('Something went wrong')
+      return toast.error('Something went wrong when trying to post API')
     }
 
-    sendEmail()
+    await sendEmail();
   }
 
   const onChangeTextAreas = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -133,7 +137,7 @@ export const Form = () => {
           }
         </div>
         <div className={stylesForm.flex}>
-          <button type="submit" className={stylesForm.btn}>{ loading ? `Sending...`: 'Send'}</button>
+          <button type="submit" className={stylesForm.btn}>{ loading ? <LoadingPage isActive={true} /> : 'Send'}</button>
           <Link href='/' className={stylesForm.btn}>Go Home</Link>
         </div>
       </form>
