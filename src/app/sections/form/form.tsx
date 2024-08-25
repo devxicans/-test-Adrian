@@ -64,27 +64,6 @@ export const Form = () => {
     await sendContact(newContact)
   }
 
-  const sendEmail = async () => {
-    const { email } = contactInfo;
-
-    const response = await fetch('/api/email', {
-      method: "POST",
-      body: JSON.stringify({email})
-    })
-
-    if (!response.ok) {
-      setLoading(false)
-      return toast.error('Something went wrong when trying to sent email')
-    }
-
-    toast.success('Email sent successfully')
-    setLoading(false)
-    setIsFocusName(false)
-    setIsFocusEmail(false)
-    setIsFocusMessage(false)
-    setContactInfo({ name: '', email: '', message: ''})
-  }
-
   const sendContact = async (info: ContactInfo) => {
     const response = await fetch('/api/contacts', {
         method: "POST",
@@ -92,10 +71,15 @@ export const Form = () => {
     })
 
     if (!response.ok) {
-      return toast.error('Something went wrong when trying to post API')
+      return toast.error('Something went wrong')
     }
 
-    await sendEmail();
+    toast.success('Email sent successfully')
+    setIsFocusName(false)
+    setIsFocusEmail(false)
+    setIsFocusMessage(false)
+    setContactInfo({ name: '', email: '', message: ''})
+    setLoading(false)
   }
 
   const onChangeTextAreas = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
