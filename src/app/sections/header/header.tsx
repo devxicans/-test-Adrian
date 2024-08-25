@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export const Header = () => {
   return (
-    <header className={StylesHeader.header}>
+    <header title="heading" className={StylesHeader.header}>
       <div className="container">
         <div className={StylesHeader.wrapper}>
           <Link href='/profile'>
