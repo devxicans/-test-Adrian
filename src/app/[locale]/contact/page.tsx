@@ -1,4 +1,4 @@
-import {Form} from '../sections'
+import { Form } from '../sections';
 
 import { Metadata } from 'next'
 

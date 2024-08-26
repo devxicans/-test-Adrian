@@ -5,8 +5,14 @@ import StylesHeader from '../header.module.css'
 import Link from 'next/link'
 
 const HeaderItems = () => {
+
   return (
-    <UiNavbar rounded="all"  className={StylesHeader.flex} stretch noBackground>
+    <UiNavbar rounded="all" className={StylesHeader.flex} stretch noBackground>
+      <Link  className={StylesHeader.link} href='/contacts'>
+        <UiNavbarItem  motion={{ ...UiReactHoverScaleUp }}>
+          <UiText className={StylesHeader.padding} padding={{ all: 'five' }}>See contacts</UiText>
+        </UiNavbarItem>
+      </Link>
       <UiNavbarItem motion={{ ...UiReactHoverScaleUp }} className={StylesHeader.link}>
           <UiText className={StylesHeader.padding} padding={{all: 'five'}}>18</UiText>
       </UiNavbarItem>

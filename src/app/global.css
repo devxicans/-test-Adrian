@@ -4,9 +4,6 @@
 *
 */
 
-/* DELETE THIS IMPORT IF YOU WILL PROVIDE YOUR OWN THEME VARIABLES */
-@import url(../../node_modules/@uireact/foundation/dist/index.css);
-
 /* @UiReact DEPENDENCIES */
 
 @import url(../../node_modules/@uireact/view/dist/index.css);
