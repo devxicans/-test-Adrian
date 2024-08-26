@@ -22,6 +22,7 @@
     "@uireact/validator": "^1.5.4",
     "@uireact/view": "^3.0.4",
     "framer-motion": "^11.2.2",
+    "jest-fetch-mock": "^3.0.3",
     "next": "14.2.3",
     "nodemailer": "^6.9.14",
     "react": "^18",

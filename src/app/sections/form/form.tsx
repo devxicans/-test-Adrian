@@ -100,21 +100,21 @@ export const Form = () => {
           NewsLetter
         </h3>
         <div onFocus={() => setIsFocusName(true)} className={stylesForm.wrapper}>
-          <input type="text" name='name' id='name' value={contactInfo.name} className={errors ? errors.name ? stylesForm.input__error : stylesForm.input : stylesForm.input}  onChange={onChangeInputs}  autoComplete='off'  required  />
+          <input type="text" name='name' id='name' value={contactInfo.name} className={errors ? errors.name ? stylesForm.input__error : stylesForm.input : stylesForm.input}  onChange={onChangeInputs}  autoComplete='off'    />
           <label className={isFocusName ? stylesForm.active : stylesForm.label} htmlFor='name'>Full Name</label>
           {
             errors?.name?.[0].message && <span className={stylesForm.span}>{errors?.name?.[0].message} </span>
           }
         </div>
         <div onFocus={() => setIsFocusEmail(true)} className={stylesForm.wrapper}>
-          <input  type='email' name='email' value={contactInfo.email} id='email' className={errors ? errors.email ? stylesForm.input__error : stylesForm.input : stylesForm.input} onChange={onChangeInputs}  autoComplete='off'    required />
+          <input  type='text' name='email' value={contactInfo.email} id='email' className={errors ? errors.email ? stylesForm.input__error : stylesForm.input : stylesForm.input} onChange={onChangeInputs}  autoComplete='off'     />
           <label className={isFocusEmail ? stylesForm.active  :  stylesForm.label} htmlFor='email'>Email</label>
           {
             errors?.email?.map((msgError, inx) => (<span key={`Email_error_message_${inx}`} className={stylesForm.span}>{msgError.message} </span>))
           }
         </div>
         <div onFocus={() => setIsFocusMessage(true)} className={stylesForm.wrapper}>
-          <textarea  className={errors ? errors.message ? stylesForm.input__error : stylesForm.input : stylesForm.input} name='message' id='message' value={contactInfo.message}  autoComplete='off' onChange={onChangeTextAreas} required  ></textarea>
+          <textarea  className={errors ? errors.message ? stylesForm.input__error : stylesForm.input : stylesForm.input} name='message' id='message' value={contactInfo.message}  autoComplete='off' onChange={onChangeTextAreas}   ></textarea>
           <label className={isFocusMessage ? stylesForm.active  :  stylesForm.label} htmlFor='message'>Message</label>
           {
             errors?.message?.[0].message && <span className={stylesForm.span}>{errors?.message?.[0].message} </span>
