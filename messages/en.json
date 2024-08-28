@@ -1,5 +1,8 @@
 {
   "Header": {
-    "hello" : "See contacts"
+    "contacts" : "See contacts",
+    "direccion" : "Address",
+    "contacto" : "Contact"
+
   }
 }
