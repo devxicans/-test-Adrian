@@ -8,7 +8,7 @@ export const Header = () => {
     <header title="heading" className={StylesHeader.header}>
       <div className="container">
         <div className={StylesHeader.wrapper}>
-          <Link href='/profile'>
+          <Link href="/profile">
             <h3 className={StylesHeader.logo}>Adrian Covarrubias</h3>
           </Link>
           <HeaderItems/>

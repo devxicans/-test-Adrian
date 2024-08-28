@@ -5,7 +5,6 @@ import './global.css';
 import {ToastContainer} from 'react-toastify'
 import 'react-toastify/ReactToastify.css'
 
-const sen = Sen({ style: 'normal', subsets: ['latin'], variable: '--font-family' });
 
 export const metadata: Metadata = {
   title: "Adrian - HomePage",

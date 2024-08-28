@@ -3,7 +3,6 @@ import Image from 'next/image'
 import Image1 from '@/../public/image1.jpg'
 import Image2 from '@/../public/image2.jpg'
 import Image3 from '@/../public/image3.jpg'
-import Link from 'next/link'
 
 
 export const ProfilePhotos = () => {
