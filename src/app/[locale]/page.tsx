@@ -1,16 +1,13 @@
-import { Hero } from './sections';
-import { Header } from './sections';
-import { useTranslations } from 'next-intl';
+import { getDictionary, SupportedDictionaries } from '@/lib'
 
-export default function Home() {
-  const t = useTranslations('Header')
+type PageProps = {
+  params: {
+    locale: SupportedDictionaries;
+  }
+}
 
-  return (
-    <>
-      <Header />
-    <main>
-      <Hero />
-    </main>
-    </>
-  );
+export default async function Page({ params : {locale}} : PageProps) {
+  const { Header } = await getDictionary(locale)
+
+  return <h1>{Header.contacto}</h1>
 }
