@@ -1,20 +1,20 @@
+'use client'
 import Link from "next/link"
-import Image from "next/image"
 import { Metadata } from "next"
 import { ProfilePhotos } from "../sections"
 import stylesProfile from '../sections/profilePhotos/profile.module.css'
+import { useLocalization } from "@/lib/context"
 
-export const metadata: Metadata = {
-  title: "Adrian - Profile"
-}
+
 
 const Profile = () => {
+  const { Header } = useLocalization();
 
   return (
     <>
     <section className={stylesProfile.gradient}>
       <Link href='/' className={stylesProfile.link}>
-        Go to Home
+        {Header.goHome}
       </Link>
       <ProfilePhotos />
     </section>

@@ -1,5 +1,4 @@
 import { Form } from '../sections';
-
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -10,7 +9,7 @@ const Contact = () => {
 
   return (
     <>
-      <Form/>
+        <Form />
     </>
   )
 }

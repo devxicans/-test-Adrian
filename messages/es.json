@@ -2,6 +2,17 @@
   "Header": {
     "contacts" : "Ver contactos",
     "direccion" : "Dirreción",
-    "contacto" : "Contacto"
+    "contacto" : "Contacto",
+    "goHome" : "Ir al inicio"
+  },
+  "Form" : {
+    "labelName" : "Nombre Completo",
+    "labelEmail" : "Email",
+    "labelMessage" : "Mensaje",
+    "errorName" : "El nombre es obligatorio",
+    "errorEmail" : "El email es obligatorio",
+    "errorMessage" : "El mensaje es obligatorio",
+    "send" : "Enviar",
+    "home" : "Ir al inicio"
   }
 }

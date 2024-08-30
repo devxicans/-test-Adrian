@@ -1,13 +1,13 @@
-import { getDictionary, SupportedDictionaries } from '@/lib'
+import { Hero } from './sections';
+import { Header } from './sections';
 
-type PageProps = {
-  params: {
-    locale: SupportedDictionaries;
-  }
-}
-
-export default async function Page({ params : {locale}} : PageProps) {
-  const { Header } = await getDictionary(locale)
-
-  return <h1>{Header.contacto}</h1>
+export default function Home() {
+  return (
+    <>
+      <Header />
+    <main>
+      <Hero />
+    </main>
+    </>
+  );
 }

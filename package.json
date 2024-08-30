@@ -11,6 +11,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@formatjs/intl-localematcher": "^0.5.4",
     "@uireact/card": "^3.7.0",
     "@uireact/dialog": "^3.0.3",
     "@uireact/flex": "^3.0.3",
@@ -18,11 +19,14 @@
     "@uireact/framer-animations": "^0.8.2",
     "@uireact/icons": "^3.0.5",
     "@uireact/navbar": "^3.0.8",
+    "@uireact/table": "^2.1.12",
     "@uireact/text": "^3.0.4",
     "@uireact/validator": "^1.5.4",
     "@uireact/view": "^3.0.4",
     "framer-motion": "^11.2.2",
     "jest-fetch-mock": "^3.0.3",
+    "mongoose": "^8.6.0",
+    "negotiator": "^0.6.3",
     "next": "14.2.3",
     "nodemailer": "^6.9.14",
     "react": "^18",

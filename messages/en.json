@@ -2,7 +2,17 @@
   "Header": {
     "contacts" : "See contacts",
     "direccion" : "Address",
-    "contacto" : "Contact"
-
+    "contacto" : "Contact",
+    "goHome" : "Go To Home"
+  },
+  "Form" : {
+    "labelName" : "Full Name",
+    "labelEmail" : "Email",
+    "labelMessage" : "Message",
+    "errorName" : "First name is required",
+    "errorEmail" : "Email is required",
+    "errorMessage" : "Message is required",
+    "send" : "Send",
+    "home" : "Go Home"
   }
 }

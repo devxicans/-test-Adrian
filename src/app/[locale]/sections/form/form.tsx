@@ -6,6 +6,7 @@ import React from 'react'
 import { UiValidator, UiValidatorErrors } from '@uireact/validator';
 import { toast } from 'react-toastify'
 import LoadingPage from '@/app/loading'
+import { useLocalization } from '@/lib/context'
 
 const validator = new UiValidator();
 
@@ -21,8 +22,9 @@ type ContactInfo = {
   message: string;
 }
 
-
 export const Form = () => {
+  const {Form} = useLocalization()
+
   const [contactInfo, setContactInfo] = useState<ContactInfo>({
     name: "",
     email: "",
@@ -101,28 +103,28 @@ export const Form = () => {
         </h3>
         <div onFocus={() => setIsFocusName(true)} className={stylesForm.wrapper}>
           <input type="text" name='name' id='name' value={contactInfo.name} className={errors ? errors.name ? stylesForm.input__error : stylesForm.input : stylesForm.input}  onChange={onChangeInputs}  autoComplete='off'    />
-          <label className={isFocusName ? stylesForm.active : stylesForm.label} htmlFor='name'>Full Name</label>
+          <label className={isFocusName ? stylesForm.active : stylesForm.label} htmlFor='name'>{ Form.labelName}</label>
           {
             errors?.name?.[0].message && <span className={stylesForm.span}>{errors?.name?.[0].message} </span>
           }
         </div>
         <div onFocus={() => setIsFocusEmail(true)} className={stylesForm.wrapper}>
           <input  type='text' name='email' value={contactInfo.email} id='email' className={errors ? errors.email ? stylesForm.input__error : stylesForm.input : stylesForm.input} onChange={onChangeInputs}  autoComplete='off'     />
-          <label className={isFocusEmail ? stylesForm.active  :  stylesForm.label} htmlFor='email'>Email</label>
+          <label className={isFocusEmail ? stylesForm.active : stylesForm.label} htmlFor='email'>{ Form.labelEmail}</label>
           {
             errors?.email?.map((msgError, inx) => (<span key={`Email_error_message_${inx}`} className={stylesForm.span}>{msgError.message} </span>))
           }
         </div>
         <div onFocus={() => setIsFocusMessage(true)} className={stylesForm.wrapper}>
           <textarea  className={errors ? errors.message ? stylesForm.input__error : stylesForm.input : stylesForm.input} name='message' id='message' value={contactInfo.message}  autoComplete='off' onChange={onChangeTextAreas}   ></textarea>
-          <label className={isFocusMessage ? stylesForm.active  :  stylesForm.label} htmlFor='message'>Message</label>
+          <label className={isFocusMessage ? stylesForm.active : stylesForm.label} htmlFor='message'>{Form.labelMessage }</label>
           {
             errors?.message?.[0].message && <span className={stylesForm.span}>{errors?.message?.[0].message} </span>
           }
         </div>
         <div className={stylesForm.flex}>
-          <button type="submit" className={stylesForm.btn}>{ loading ? <LoadingPage isActive={true} /> : 'Send'}</button>
-          <Link href='/' className={stylesForm.btn}>Go Home</Link>
+          <button type="submit" className={stylesForm.btn}>{ loading ? <LoadingPage isActive={true} /> : Form.send}</button>
+          <Link href='/' className={stylesForm.btn}>{Form.home }</Link>
         </div>
       </form>
     </div>

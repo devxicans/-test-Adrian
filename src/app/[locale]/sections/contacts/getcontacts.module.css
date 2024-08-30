@@ -1,0 +1,14 @@
+.container {
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+.wrapper {
+  padding: 20px;
+  background-color: var(--header-color);
+  border-radius: 20px;
+  min-width: 600px;
+  text-align: center;
+}
