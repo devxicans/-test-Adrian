@@ -7,9 +7,10 @@ type Contacts = {
   email: string,
   message: string,
 }
+const developmentEnv = process.env.development || '/';
 
 async function fetchContacts() {
-  const response = await fetch('http://localhost:3000/api/contacts', {
+  const response = await fetch(`${developmentEnv}api/contacts`, {
     next : {
       revalidate: 10
     }
