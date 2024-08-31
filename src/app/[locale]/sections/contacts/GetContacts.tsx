@@ -7,7 +7,7 @@ type Contacts = {
   email: string,
   message: string,
 }
-const developmentEnv = process.env.development || '/';
+const developmentEnv = process.env.development || 'https://test-adrian-olive.vercel.app/';
 
 async function fetchContacts() {
   const response = await fetch(`${developmentEnv}api/contacts`, {
@@ -23,7 +23,6 @@ async function fetchContacts() {
 
 export const GetContacts = async () => {
   const data = await fetchContacts()
-
 
   return (
     <div className={Styles.container}>
