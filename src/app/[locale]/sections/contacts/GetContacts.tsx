@@ -1,39 +1,51 @@
-'use client'
-import { UiTable } from '@uireact/table'
-import Styles from './getcontacts.module.css'
+import Contacts from '../../contacts/page'
+import Styles from './getcontacts.module.css';
 
-async function fetchContacts() {
-  const response = await fetch('/api/contacts', {
-    next: {
-      revalidate: 10,
-    }
-  });
-
-  const contacts = await response.json();
-  return contacts;
+type Contacts = {
+  id: number,
+  name: string,
+  email: string,
+  message: string,
 }
 
+async function fetchContacts() {
+  const response = await fetch('http://localhost:3000/api/contacts', {
+    next : {
+      revalidate: 10
+    }
+  }
+  );
+  const dataContacts = await response.json();
+  return dataContacts;
+}
+
+
 export const GetContacts = async () => {
-  const contacts = await fetchContacts();
+  const data = await fetchContacts()
+
 
   return (
     <div className={Styles.container}>
-      <UiTable className={Styles.wrapper}
-      bordered
-      data={{
-        headings: [{ label: 'Name', sort: false }, { label: 'Email', sort: false } , { label: 'Message', sort: false }],
-        items: [
-          { id: '1', cols: [] },
-        ],
-      }}
-      selected="3"
-      onClick={(id) => {
-        console.log(`id ${id} selected`);
-        }}
-        category="tertiary"
-        withSort={false}
-        withFilter={false}
-    />
-  </div>
+      <table className={Styles.styledtable}>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+          <tbody>
+            {
+              data.contacts.map((contact : Contacts) => (
+                <tr key={contact.id}>
+                  <td>{ contact.name}</td>
+                  <td>{ contact.email }</td>
+                  <td>{contact.message}</td>
+                </tr>
+                ))
+            }
+          </tbody>
+      </table>
+   </div>
   )
 }

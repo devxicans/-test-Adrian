@@ -14,9 +14,6 @@ const contactsSchema = new Schema(
       type: String,
       required: [true, "Please add a message value"]
     },
-  },
-  {
-    timestamps: true
   }
 )
 

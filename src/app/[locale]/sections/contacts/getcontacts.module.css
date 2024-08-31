@@ -1,14 +1,35 @@
 .container {
-  min-height: 100svh;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding-top: 100px;
 }
 
-.wrapper {
-  padding: 20px;
-  background-color: var(--header-color);
-  border-radius: 20px;
-  min-width: 600px;
-  text-align: center;
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 18px;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styledtable thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styledtable th,
+.styledtable td {
+  padding: 12px 15px;
+}
+
+.styledtable tbody tr {
+  border-bottom: 1px solid #dddddd;
+  background-color: gray;
+}
+
+.styledtable tbody tr.active-row {
+  font-weight: bold;
+  color: black;
 }
