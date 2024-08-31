@@ -7,10 +7,10 @@ type Contacts = {
   email: string,
   message: string,
 }
-const developmentEnv = process.env.development || 'https://test-adrian-olive.vercel.app/';
+const developmentEnv = process.env.development || 'https://test-adrian-olive.vercel.app';
 
 async function fetchContacts() {
-  const response = await fetch(`${developmentEnv}api/contacts`, {
+  const response = await fetch(`${developmentEnv}/api/contacts`, {
     next : {
       revalidate: 10
     }
