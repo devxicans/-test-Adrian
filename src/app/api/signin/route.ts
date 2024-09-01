@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import user from "@/lib/schema/usersSchema";
 import connectDB from "@/lib/db/mongoDB";
+import bcrypt from 'bcrypt';
 
 export async function POST(req: Request) {
   const { email, password } = await req.json();
@@ -13,12 +14,11 @@ export async function POST(req: Request) {
 
   const userExist = await user.findOne({ email });
 
-  if (userExist) {
+  if (userExist && (await bcrypt.compare(password, userExist.password))) {
     return NextResponse.json({
-      message: "You have the right credentials"
-    }, {status: 200})
+      _id : userExist.id
+    }, { status: 200 })
   } else {
-    return NextResponse.json({ error: 'There is no user that exist in our database with that email' }, { status: 400 })
+    return NextResponse.json({ message: 'There is no user that exist in our database with that email' }, { status: 401 })
   }
-
 }

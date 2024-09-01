@@ -8,18 +8,22 @@ export async function POST(req: Request) {
   await connectDB();
 
   if (!name || !email || !password) {
-    return NextResponse.json({ error: 'You should fill every field of the form' }, { status: 400 })
+    return NextResponse.json({ message: 'You should fill every field of the form' }, { status: 400 })
   }
 
-   await user.create({
+  const checkIfEmailExist = await user.findOne({email})
+
+  if (checkIfEmailExist) {
+    return NextResponse.json({ message: 'You should enter a different email' }, { status: 400 })
+  }
+
+   const newUser = await user.create({
     name,
     email,
     password
   })
 
   return NextResponse.json({
-    name,
-    email,
-    password
-  })
+    _id: newUser.id
+  }, {status: 201})
 }

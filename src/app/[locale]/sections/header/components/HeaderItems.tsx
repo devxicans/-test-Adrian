@@ -4,10 +4,13 @@ import {UiReactHoverScaleUp } from '@uireact/framer-animations'
 import StylesHeader from '../header.module.css'
 import Link from 'next/link'
 import { useLocalization } from '@/lib/context'
+import { deleteSession } from '@/lib'
 
 
 const HeaderItems = () => {
   const { Header } = useLocalization();
+
+
 
   return (
     <UiNavbar rounded="all" className={StylesHeader.flex} stretch noBackground>
