@@ -3,7 +3,8 @@
     "contacts" : "See contacts",
     "direccion" : "Address",
     "contacto" : "Contact",
-    "goHome" : "Go To Home"
+    "goHome" : "Go To Home",
+    "logout" : "Log Out"
   },
   "Form" : {
     "labelName" : "Full Name",

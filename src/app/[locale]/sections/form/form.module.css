@@ -109,3 +109,18 @@
 .span__close {
   display: none;
 }
+
+.account {
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--clr-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.loggin {
+  font-weight: bolder;
+  cursor: pointer;
+}

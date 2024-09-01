@@ -1,6 +1,7 @@
 'use server'
 import { createSession, FormState, SignupFormSchema } from "@/lib"
 import bcrypt from 'bcrypt';
+import { redirect } from "next/navigation";
 
 
 const developmentEnv = process.env.development || 'https://test-adrian-olive.vercel.app';
@@ -19,9 +20,9 @@ export async function signup(state: FormState, formData: FormData) {
     }
   }
 
+  // 2. Create User
   const { name, email, password } = validationResult.data;
 
-  // 2. Create User
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const response = await fetch(`${developmentEnv}/api/signup`, {
@@ -32,5 +33,7 @@ export async function signup(state: FormState, formData: FormData) {
   const data = await response.json();
 
   // 3. Create Session
-  await createSession(data.name)
+  await createSession(data._id)
+
+  redirect('/')
 }

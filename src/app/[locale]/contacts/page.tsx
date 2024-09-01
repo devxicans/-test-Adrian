@@ -15,7 +15,7 @@ const Contacts = () => {
       <Link href='/' className={stylesProfile.link}>
         Home
       </Link>
-        <GetContacts />
+      <GetContacts />
     </>
     )
 }
