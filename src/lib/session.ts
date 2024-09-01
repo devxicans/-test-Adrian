@@ -39,7 +39,7 @@ export async function createSession(userId: string) {
     path: '/',
   });
 
-  return redirect('/en');
+  redirect('/');
 }
 
 export async function verifySession() {
@@ -49,8 +49,6 @@ export async function verifySession() {
   if (!session?.userId) {
     redirect('/register');
   }
-
-  return { isAuth: true, userId: Number(session.userId) };
 }
 
 export async function updateSession() {

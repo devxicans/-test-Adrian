@@ -1,13 +1,13 @@
 'use client'
 import stylesForm from '../form/form.module.css'
-import Link from 'next/link'
 import { signup } from './action'
 import { useFormState, useFormStatus } from 'react-dom'
 import { useState } from 'react'
+import LoadingPage from '@/app/loading'
 
 export const SignUpForm = () => {
   const [state, action] = useFormState(signup, undefined)
-  const { pending}  = useFormStatus();
+  const { pending }  = useFormStatus();
   const [isFocusName, setIsFocusName] = useState<boolean>(false);
   const [isFocusEmail, setIsFocusEmail] = useState<boolean>(false);
   const [isFocusPassword, setIsFocusPassword] = useState<boolean>(false);
@@ -29,7 +29,7 @@ export const SignUpForm = () => {
           {state?.errors?.email && <p className={stylesForm.span}>{state.errors.email}</p>}
         </div>
         <div onFocus={() => setIsFocusPassword(true)} className={stylesForm.wrapper}>
-          <input  type='text' name='password' id='password' className={stylesForm.input}  autoComplete='off' />
+          <input  type='password' name='password' id='password' className={stylesForm.input}  autoComplete='off' />
           <label className={isFocusPassword ? stylesForm.active : stylesForm.label} htmlFor='password'>Password</label>
           {state?.errors?.password && (
             <div className={stylesForm.span}>
@@ -43,10 +43,9 @@ export const SignUpForm = () => {
       )}
         </div>
         <div className={stylesForm.flex}>
-          <button disabled={pending} type="submit" className={stylesForm.btn}>
-            {pending ? 'Submitting...' : 'Sign Up'}
+          <button disabled={pending} className={stylesForm.btn}>
+            {pending ? <LoadingPage /> : 'Sign Up'}
           </button>
-          <Link href='/' className={stylesForm.btn}>Go Home</Link>
         </div>
       </form>
     </div>
