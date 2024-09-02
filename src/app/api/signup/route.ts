@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   const checkIfEmailExist = await user.findOne({email})
 
   if (checkIfEmailExist) {
-    return NextResponse.json({ message: 'You should enter a different email' }, { status: 400 })
+    return NextResponse.json({ error: 'You should enter a different email' }, { status: 400 })
   }
 
    const newUser = await user.create({

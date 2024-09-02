@@ -32,8 +32,8 @@ export async function signup(state: FormState, formData: FormData) {
 
   const data = await response.json();
 
+  if (!response.ok) return;
+
   // 3. Create Session
   await createSession(data._id)
-
-  redirect('/')
 }

@@ -2,10 +2,13 @@
   padding: 20px;
   background-color: var(--header-color);
   box-shadow: var(--sidebar-shadow);
+  cursor: pointer;
+  user-select: none;
 }
 
 .logo {
   font-size: var(--text-2xl);
+  color: var(--clr-default);
 }
 
 .wrapper {
@@ -24,6 +27,7 @@
 .padding {
   background-color: var(--bg-color);
   border-radius: 10px;
+  color: var(--clr-default);
 }
 
 /* sm */

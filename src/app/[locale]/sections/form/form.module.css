@@ -45,6 +45,7 @@
   font-weight: 500;
   background-color: inherit;
   outline: 1px solid red;
+  color: var(--clr-default);
 }
 
 .title {
@@ -98,6 +99,7 @@
   justify-content: center;
   gap: 10px;
   border-radius: 10px;
+  color: var(--clr-default);
 }
 
 .span {

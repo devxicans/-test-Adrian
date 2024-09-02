@@ -47,8 +47,8 @@ export const SignUpForm = () => {
       )}
         </div>
         <div className={stylesForm.flex}>
-          <button disabled={pending} className={stylesForm.btn}>
-            {pending ? <LoadingPage /> : 'Submit'}
+          <button type='submit' disabled={pending} className={stylesForm.btn}>
+            Submit
           </button>
         </div>
         <span className={stylesForm.account}>
