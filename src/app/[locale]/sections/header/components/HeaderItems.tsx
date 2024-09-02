@@ -4,13 +4,13 @@ import {UiReactHoverScaleUp } from '@uireact/framer-animations'
 import StylesHeader from '../header.module.css'
 import Link from 'next/link'
 import { useLocalization } from '@/lib/context'
-import { deleteSession } from '@/lib'
-
 
 const HeaderItems = () => {
   const { Header } = useLocalization();
 
-
+  const removeSession =  () => {
+    fetch('/api/removeuser');
+  }
 
   return (
     <UiNavbar rounded="all" className={StylesHeader.flex} stretch noBackground>
@@ -32,6 +32,11 @@ const HeaderItems = () => {
           <UiText className={StylesHeader.padding} padding={{all: 'five'}}> { Header.contacto}</UiText>
         </UiNavbarItem>
       </Link>
+      <div onClick={ () => removeSession()} className={StylesHeader.link}>
+        <UiNavbarItem motion={{ ...UiReactHoverScaleUp }} >
+          <UiText className={StylesHeader.padding} padding={{ all: 'five' }}>{Header.logout }</UiText>
+        </UiNavbarItem>
+      </div>
     </UiNavbar>
   )
 }

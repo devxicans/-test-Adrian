@@ -1,6 +1,5 @@
 'use server'
 import { FormLogin, LoginFormSchema, createSession } from "@/lib";
-import { redirect } from "next/navigation";
 
 const developmentEnv = process.env.development || 'https://test-adrian-olive.vercel.app';
 
@@ -27,8 +26,8 @@ export async function signin(state: FormLogin, formData: FormData) {
 
   const data = await response.json();
 
+  if (!response.ok) return;
+
   // 3. Create Session
   await createSession(data._id)
-
-  redirect('/')
 }
