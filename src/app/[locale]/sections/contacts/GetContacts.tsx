@@ -1,5 +1,7 @@
 import Contacts from '../../contacts/page'
 import Styles from './getcontacts.module.css';
+import connectDB from '@/lib/db/mongoDB';
+import contact from '@/lib/schema/contactsSchema';
 
 type Contacts = {
   id: number,
@@ -9,20 +11,11 @@ type Contacts = {
 }
 const developmentEnv = process.env.development || 'https://test-adrian-olive.vercel.app';
 
-async function fetchContacts() {
-  const response = await fetch(`${developmentEnv}/api/contacts`, {
-    next : {
-      revalidate: 10
-    }
-  }
-  );
-  const dataContacts = await response.json();
-  return dataContacts;
-}
 
 
 export const GetContacts = async () => {
-  const data = await fetchContacts()
+  await connectDB();
+  const getContacts = await contact.find();
 
   return (
     <div className={Styles.container}>
@@ -36,7 +29,7 @@ export const GetContacts = async () => {
         </thead>
           <tbody>
             {
-              data.contacts.map((contact : Contacts) => (
+              getContacts.map((contact : Contacts) => (
                 <tr key={contact.id}>
                   <td>{ contact.name}</td>
                   <td>{ contact.email }</td>

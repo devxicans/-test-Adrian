@@ -7,6 +7,7 @@ import { UiValidator, UiValidatorErrors } from '@uireact/validator';
 import { toast } from 'react-toastify'
 import LoadingPage from '@/app/loading'
 import { useLocalization } from '@/lib/context'
+import { useRouter } from 'next/navigation'
 
 const validator = new UiValidator();
 
@@ -23,6 +24,7 @@ type ContactInfo = {
 }
 
 export const Form = () => {
+  const router = useRouter();
   const {Form} = useLocalization()
 
   const [contactInfo, setContactInfo] = useState<ContactInfo>({
@@ -82,6 +84,7 @@ export const Form = () => {
     setIsFocusMessage(false)
     setContactInfo({ name: '', email: '', message: ''})
     setLoading(false)
+    router.refresh();
   }
 
   const onChangeTextAreas = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
