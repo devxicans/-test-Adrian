@@ -3,18 +3,6 @@ import { transport } from "@/app/utils/mail.utils";
 import connectDB from "@/lib/db/mongoDB";
 import contact from "@/lib/schema/contactsSchema";
 
-export async function GET() {
-  try {
-    await connectDB();
-    const contacts = await contact.find();
-    return NextResponse.json({ contacts }, { status: 200 })
-  }  catch (error) {
-    console.log(error);
-    return NextResponse.json({message: "Bad Request"}, {status: 500});
-  }
-}
-
-
 export async function POST(req: Request) {
   const { name, email, message } = await req.json();
 
@@ -40,7 +28,7 @@ export async function POST(req: Request) {
       email,
       message
     })
-  
+
 
     return NextResponse.json({
       name,

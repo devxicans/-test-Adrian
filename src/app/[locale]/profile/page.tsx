@@ -1,11 +1,8 @@
 'use client'
 import Link from "next/link"
-import { Metadata } from "next"
 import { ProfilePhotos } from "../sections"
 import stylesProfile from '../sections/profilePhotos/profile.module.css'
 import { useLocalization } from "@/lib/context"
-
-
 
 const Profile = () => {
   const { Header } = useLocalization();

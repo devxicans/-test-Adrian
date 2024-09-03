@@ -1,4 +1,5 @@
-import mongoose, {Schema} from "mongoose";
+'use server'
+import mongoose, { Schema } from "mongoose";
 
 const contactsSchema = new Schema(
   {
