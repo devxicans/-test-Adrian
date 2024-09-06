@@ -9,9 +9,6 @@ type Contacts = {
   email: string,
   message: string,
 }
-const developmentEnv = process.env.development || 'https://test-adrian-olive.vercel.app';
-
-
 
 export const GetContacts = async () => {
   await connectDB();
