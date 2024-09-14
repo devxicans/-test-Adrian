@@ -1,10 +1,8 @@
 'use server'
 import { createSession, FormState, SignupFormSchema } from "@/lib"
 import bcrypt from 'bcrypt';
-import { redirect } from "next/navigation";
-
-
-const developmentEnv = process.env.development || 'https://test-adrian-olive.vercel.app';
+import connectDB from "@/lib/db/mongoDB";
+import user from "@/lib/schema/usersSchema";
 
 export async function signup(state: FormState, formData: FormData) {
   // 1. Validate Fields
@@ -25,15 +23,23 @@ export async function signup(state: FormState, formData: FormData) {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const response = await fetch(`${developmentEnv}/api/signup`, {
-    method: 'POST',
-    body: JSON.stringify({name, email, password: hashedPassword})
+  await connectDB();
+
+  const checkIfEmailExist = await user.findOne({email})
+
+  if (checkIfEmailExist) {
+    return
+      { errors: 'You should enter a different email' }
+  }
+
+  const newUser = await user.create({
+    name,
+    email,
+    password : hashedPassword
   })
 
-  const data = await response.json();
-
-  if (!response.ok) return;
+  console.log(newUser);
 
   // 3. Create Session
-  await createSession(data._id)
+  await createSession(newUser._id)
 }

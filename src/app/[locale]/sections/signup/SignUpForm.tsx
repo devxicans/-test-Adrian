@@ -3,10 +3,9 @@ import stylesForm from '../form/form.module.css'
 import { signup } from './action'
 import { useFormState, useFormStatus } from 'react-dom'
 import { useState } from 'react'
-import LoadingPage from '@/app/loading'
 import Link from 'next/link'
 import { TfiUser } from "react-icons/tfi";
-
+import LoadingPage from '@/app/loading'
 
 
 export const SignUpForm = () => {
@@ -25,7 +24,7 @@ export const SignUpForm = () => {
         <div onFocus={() => setIsFocusName(true)} className={stylesForm.wrapper}>
           <input type="text" name='name' id='name' className={stylesForm.input} autoComplete='off' />
           <label className={isFocusName ? stylesForm.active : stylesForm.label} htmlFor='name'>Name</label>
-          {state?.errors?.name && <p className={stylesForm.span}>{state.errors.name}</p>}
+          {state?.errors?.name && <p aria-live='polite' className={stylesForm.span}>{state.errors.name}</p>}
         </div>
         <div onFocus={() => setIsFocusEmail(true)} className={stylesForm.wrapper}>
           <input  type='text' name='email' id='email' className={ stylesForm.input} autoComplete='off' />
@@ -47,8 +46,8 @@ export const SignUpForm = () => {
       )}
         </div>
         <div className={stylesForm.flex}>
-          <button type='submit' disabled={pending} className={stylesForm.btn}>
-            Submit
+          <button type='submit' className={stylesForm.btn}>
+            { pending ? <LoadingPage isActive={true} /> : 'Submit' }
           </button>
         </div>
         <span className={stylesForm.account}>
