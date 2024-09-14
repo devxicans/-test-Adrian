@@ -3,6 +3,7 @@ import 'server-only';
 import type { SessionPayload } from '@/lib';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
+import { permanentRedirect } from 'next/navigation';
 import { redirect } from 'next/navigation';
 
 const secretKey = process.env.SECRET;
@@ -71,5 +72,5 @@ export async function updateSession() {
 
 export function deleteSession() {
   cookies().delete('session');
-  redirect('/login')
+  permanentRedirect('/login')
 }

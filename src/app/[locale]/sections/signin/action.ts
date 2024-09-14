@@ -1,7 +1,8 @@
 'use server'
 import { FormLogin, LoginFormSchema, createSession } from "@/lib";
-
-const developmentEnv = process.env.development || 'https://test-adrian-olive.vercel.app';
+import connectDB from "@/lib/db/mongoDB";
+import user from "@/lib/schema/usersSchema";
+import bcrypt from 'bcrypt';
 
 export async function signin(state: FormLogin, formData: FormData) {
   // 1. Validate Fields
@@ -19,15 +20,17 @@ export async function signin(state: FormLogin, formData: FormData) {
   // 2. Create User
   const { email, password } = validationResults.data;
 
-  const response = await fetch(`${developmentEnv}/api/signin`, {
-    method: 'POST',
-    body: JSON.stringify({email, password})
-  })
+  await connectDB()
 
-  const data = await response.json();
+  const userExist = await user.findOne({ email });
 
-  if (!response.ok) return;
-
-  // 3. Create Session
-  await createSession(data._id)
+  if (userExist && (await bcrypt.compare(password, userExist.password))) {
+    // 3. Create Session
+    await createSession(userExist._id)
+  } else {
+    return
+    {
+      errors: 'You should enter a different email'
+    }
+  }
 }

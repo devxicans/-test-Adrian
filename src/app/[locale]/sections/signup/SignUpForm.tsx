@@ -5,8 +5,7 @@ import { useFormState, useFormStatus } from 'react-dom'
 import { useState } from 'react'
 import Link from 'next/link'
 import { TfiUser } from "react-icons/tfi";
-import { toast } from 'react-toastify'
-
+import LoadingPage from '@/app/loading'
 
 
 export const SignUpForm = () => {
@@ -47,8 +46,8 @@ export const SignUpForm = () => {
       )}
         </div>
         <div className={stylesForm.flex}>
-          <button type='submit' disabled={pending} className={stylesForm.btn}>
-            Submit
+          <button type='submit' className={stylesForm.btn}>
+            { pending ? <LoadingPage isActive={true} /> : 'Submit' }
           </button>
         </div>
         <span className={stylesForm.account}>
