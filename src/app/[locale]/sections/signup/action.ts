@@ -5,6 +5,7 @@ import connectDB from "@/lib/db/mongoDB";
 import user from "@/lib/schema/usersSchema";
 
 export async function signup(state: FormState, formData: FormData) {
+
   // 1. Validate Fields
   const validationResult = SignupFormSchema.safeParse({
     name: formData.get('name'),
@@ -19,11 +20,11 @@ export async function signup(state: FormState, formData: FormData) {
   }
 
   // 2. Create User
+  await connectDB();
+
   const { name, email, password } = validationResult.data;
 
   const hashedPassword = await bcrypt.hash(password, 10);
-
-  await connectDB();
 
   const checkIfEmailExist = await user.findOne({email})
 
@@ -37,8 +38,6 @@ export async function signup(state: FormState, formData: FormData) {
     email,
     password : hashedPassword
   })
-
-  console.log(newUser);
 
   // 3. Create Session
   await createSession(newUser._id)

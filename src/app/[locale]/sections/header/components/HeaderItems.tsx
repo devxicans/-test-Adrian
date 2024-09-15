@@ -1,3 +1,4 @@
+'use client'
 import { UiText } from '@uireact/text'
 import { UiNavbar, UiNavbarItem } from '@uireact/navbar'
 import {UiReactHoverScaleUp } from '@uireact/framer-animations'

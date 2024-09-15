@@ -5,12 +5,10 @@ import { useFormState, useFormStatus } from 'react-dom'
 import { useState } from 'react'
 import Link from 'next/link'
 import { TfiUser } from "react-icons/tfi";
-import LoadingPage from '@/app/loading'
 
 
 export const SignUpForm = () => {
   const [state, action] = useFormState(signup, undefined)
-  const { pending }  = useFormStatus();
   const [isFocusName, setIsFocusName] = useState<boolean>(false);
   const [isFocusEmail, setIsFocusEmail] = useState<boolean>(false);
   const [isFocusPassword, setIsFocusPassword] = useState<boolean>(false);
@@ -47,7 +45,7 @@ export const SignUpForm = () => {
         </div>
         <div className={stylesForm.flex}>
           <button type='submit' className={stylesForm.btn}>
-            { pending ? <LoadingPage isActive={true} /> : 'Submit' }
+            Submit
           </button>
         </div>
         <span className={stylesForm.account}>

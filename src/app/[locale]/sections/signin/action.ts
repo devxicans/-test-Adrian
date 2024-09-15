@@ -5,6 +5,7 @@ import user from "@/lib/schema/usersSchema";
 import bcrypt from 'bcrypt';
 
 export async function signin(state: FormLogin, formData: FormData) {
+
   // 1. Validate Fields
   const validationResults = LoginFormSchema.safeParse({
     email: formData.get('email'),
@@ -18,9 +19,9 @@ export async function signin(state: FormLogin, formData: FormData) {
   }
 
   // 2. Create User
-  const { email, password } = validationResults.data;
-
   await connectDB()
+
+  const { email, password } = validationResults.data;
 
   const userExist = await user.findOne({ email });
 
