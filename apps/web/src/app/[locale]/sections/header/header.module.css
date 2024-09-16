@@ -28,6 +28,8 @@
   background-color: var(--bg-color);
   border-radius: 10px;
   color: var(--clr-default);
+  font-size: var(--text-base);
+  padding: 12px;
 }
 
 /* sm */

@@ -62,6 +62,7 @@
   left: 0;
   margin: 12px 18px;
   cursor: auto;
+  font-size: var(--text-base);
 }
 
 .active {
@@ -73,6 +74,7 @@
   padding-inline: 2px;
   background-color: var(--header-color);
   transition: 0.2s ease-in-out;
+  font-size: var(--text-sm);
 }
 
 .btn {
