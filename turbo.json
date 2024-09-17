@@ -1,11 +1,15 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+  "globalDependencies": [
+    "**/.env",
+    "**/.env.*local"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/"],
+      "env" : ["MAIL_EMAIL", "MAIL_PASSWORD", "MONGO_URI", "SECRET"]
     },
     "lint": {
       "dependsOn": ["^lint"]

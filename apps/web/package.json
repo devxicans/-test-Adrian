@@ -11,6 +11,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@repo/ui": "workspace:*",
     "@formatjs/intl-localematcher": "^0.5.4",
     "@uireact/card": "^3.7.0",
     "@uireact/dialog": "^3.0.3",
